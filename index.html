@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Nikita Matsnev, automation engineer, DevSecOps platform specialist, AI infrastructure builder."
+    />
+    <meta name="theme-color" content="#080a0f" />
+    <meta property="og:title" content="Nikita Matsnev" />
+    <meta
+      property="og:description"
+      content="Automation, DevSecOps platforms, AI infrastructure, full-stack systems."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/nikita_matsnev_profile.png" />
+    <title>Nikita Matsnev</title>
+    <link rel="icon" href="assets/nikita_matsnev_profile.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="signal-canvas" aria-hidden="true"></canvas>
+
+    <header class="topbar" aria-label="Site header">
+      <a class="brand" href="#top" aria-label="Nikita Matsnev">
+        <span class="brand-mark">NM</span>
+        <span>Nikita Matsnev</span>
+      </a>
+      <nav class="lang-switcher" aria-label="Language">
+        <button class="lang is-active" type="button" data-lang="en">EN</button>
+        <button class="lang" type="button" data-lang="cs">CZ</button>
+        <button class="lang" type="button" data-lang="ru">RU</button>
+        <button class="lang rune" type="button" data-lang="fu">ᚠᚢ</button>
+        <button class="lang" type="button" data-lang="de">DE</button>
+        <button class="lang" type="button" data-lang="fr">FR</button>
+        <button class="lang" type="button" data-lang="es">ES</button>
+        <button class="lang" type="button" data-lang="pl">PL</button>
+      </nav>
+    </header>
+
+    <main id="top" class="shell">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow" data-i18n="eyebrow"></p>
+          <h1 id="hero-title" data-i18n="name"></h1>
+          <p class="role" data-i18n="role"></p>
+          <p class="lead" data-i18n="lead"></p>
+
+          <div class="actions" aria-label="Primary links">
+            <a class="button primary" href="mailto:matsnev2001@yandex.com" data-i18n="emailCta"></a>
+            <a class="button" href="assets/cv/nikita_matsnev_complete.pdf" data-i18n="cvCta"></a>
+          </div>
+        </div>
+
+        <aside class="identity" aria-label="Profile">
+          <img
+            class="portrait"
+            src="assets/nikita_matsnev_profile.png"
+            alt="Nikita Matsnev"
+            width="600"
+            height="600"
+          />
+          <div class="status-line">
+            <span class="pulse"></span>
+            <span data-i18n="status"></span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="split" aria-labelledby="system-title">
+        <div>
+          <p class="section-kicker" data-i18n="systemKicker"></p>
+          <h2 id="system-title" data-i18n="systemTitle"></h2>
+        </div>
+        <div class="terminal" aria-label="Profile summary">
+          <div class="terminal-bar">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <pre id="terminal-text"></pre>
+        </div>
+      </section>
+
+      <section class="grid-section" aria-labelledby="focus-title">
+        <div class="section-head">
+          <p class="section-kicker" data-i18n="focusKicker"></p>
+          <h2 id="focus-title" data-i18n="focusTitle"></h2>
+        </div>
+        <div class="focus-grid" id="focus-grid"></div>
+      </section>
+
+      <section class="proof" aria-labelledby="proof-title">
+        <div class="section-head">
+          <p class="section-kicker" data-i18n="proofKicker"></p>
+          <h2 id="proof-title" data-i18n="proofTitle"></h2>
+        </div>
+        <div class="proof-list" id="proof-list"></div>
+      </section>
+
+      <section class="cv-strip" aria-labelledby="cv-title">
+        <div>
+          <p class="section-kicker" data-i18n="cvKicker"></p>
+          <h2 id="cv-title" data-i18n="cvTitle"></h2>
+        </div>
+        <div class="cv-links">
+          <a href="assets/cv/nikita_matsnev_ai.pdf">AI</a>
+          <a href="assets/cv/nikita_matsnev_devops.pdf">DevOps</a>
+          <a href="assets/cv/nikita_matsnev_fullstack.pdf">FullStack</a>
+          <a href="assets/cv/nikita_matsnev_complete.pdf">Complete</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a href="mailto:matsnev2001@yandex.com">matsnev2001@yandex.com</a>
+      <a href="https://github.com/nickmatsnev/">github.com/nickmatsnev</a>
+      <a href="https://www.linkedin.com/in/nikita-matsnev-947a41202/">LinkedIn</a>
+      <span>Prague</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
