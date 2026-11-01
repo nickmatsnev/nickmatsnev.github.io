@@ -37,6 +37,13 @@ body:has(dialog[open]) { overflow:hidden; }
 .detail-intro h2 { font-size:40px; line-height:1.15; padding-right:20px; }
 .detail-lead { font-size:21px; color:var(--muted); line-height:1.5; margin:20px 0 0; }
 .detail-image { width:100%; height:auto; display:block; }
+.case-figure { margin:0; min-width:0; background:#f4f5f7; }
+.case-figure figcaption { padding:12px 20px; font-size:12px; line-height:1.5; color:#606873; background:#f4f5f7; }
+.case-gallery { display:grid; gap:20px; padding:20px; background:#e9edf2; }
+.case-gallery.mobile-screens { grid-template-columns:repeat(3,minmax(0,1fr)); align-items:start; }
+.case-gallery.mobile-screens .detail-image { width:100%; height:auto; }
+.case-figure a { display:block; cursor:zoom-in; }
+@media(max-width:600px) { .case-gallery.mobile-screens { grid-template-columns:1fr; } .case-gallery.mobile-screens .case-figure { width:min(100%,340px); margin-inline:auto; } }
 .image-note { color:var(--muted); font-size:12px; line-height:1.5; padding:12px 48px; margin:0; }
 .detail-story { padding:10px 48px 48px; }
 .detail-story section { padding:22px 0; border-bottom:1px solid var(--line); }

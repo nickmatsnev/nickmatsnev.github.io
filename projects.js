@@ -39,7 +39,21 @@ let category = 'All';
 let galleryLanguage = '';
 const ru = () => document.documentElement.lang === 'ru';
 const pick = (p, index) => p[index + (ru() ? 1 : 0)];
-const screenshot = p => `assets/projects/${p[0]}.png`;
+const projectMedia = {
+  sifox: {kind:'original', files:['mobile-android','mobile-ios','notifications']},
+  butler: {kind:'original', files:['mobile-ios','notifications']},
+  'voice-demo': {kind:'original',files:['voice-brazil','voice-arabic']},
+  portal: {kind:'original',files:['dhl-portal']}
+};
+const screenshot = p => `assets/projects/${p[0]}.png?v=2`;
+function mediaLabel(p) {
+  return projectMedia[p[0]] ? (ru()?'Оригинальные скриншоты':'Original screenshots') : (p[0]==='bixer'||p[0]==='crm'||p[0]==='aihub' ? (ru()?'Концепт интерфейса':'Interface concept') : (ru()?'Схема технологий':'Technology overview'));
+}
+function projectGallery(p) {
+  const media=projectMedia[p[0]];
+  if(!media)return `<figure class="case-figure"><img class="detail-image" src="${screenshot(p)}" alt="${pick(p,3)}"><figcaption>${ru()?'Иллюстрация проекта с демонстрационными данными.':'Project illustration with demonstration data.'}</figcaption></figure>`;
+  return `<div class="case-gallery ${p[0]==='sifox'||p[0]==='butler'?'mobile-screens':''}">${media.files.map((file,i)=>`<figure class="case-figure"><a href="assets/projects/originals/${file}.png" target="_blank" rel="noopener" title="${ru()?'Открыть оригинал':'Open original'}"><img class="detail-image" src="assets/projects/originals/${file}.png" alt="${pick(p,3)} — ${i+1}" loading="lazy"></a><figcaption>${mediaLabel(p)} · ${i+1} / ${media.files.length}</figcaption></figure>`).join('')}</div>`;
+}
 function renderProjects() {
   galleryLanguage = document.documentElement.lang;
   projectJump.textContent = ru() ? 'Смотреть проекты' : 'Explore projects';
@@ -49,14 +63,14 @@ function renderProjects() {
   document.querySelector('#project-filters').innerHTML = ['All','AI / Ops','Product','Early work'].map((c,i)=>`<button type="button" data-category="${c}" aria-pressed="${category===c}">${labels[i]}</button>`).join('');
   const shown = cases.filter(p=>category==='All'||p[2]===category);
   document.querySelector('#project-count').textContent = `${shown.length} / ${cases.length}`;
-  gallery.innerHTML = shown.map(p=>`<a class="project-tile" href="#project/${p[0]}" style="--tile-accent:${['#b7ff4a','#33d7ff','#f8aecc'][cases.indexOf(p)%3]}"><div class="project-image"><img loading="lazy" width="1200" height="750" src="${screenshot(p)}" alt="${pick(p,3)} — ${ru()?'демонстрационная реконструкция':'illustrative reconstruction'}"><span>${ru()?'Реконструкция':'Reconstruction'}</span></div><div class="project-meta">${p[1]}<span>${p[2]}</span></div><h3>${pick(p,3)} <span aria-hidden="true">↗</span></h3><p>${pick(p,5)}</p></a>`).join('');
+  gallery.innerHTML = shown.map(p=>`<a class="project-tile" href="#project/${p[0]}" style="--tile-accent:${['#b7ff4a','#33d7ff','#f8aecc'][cases.indexOf(p)%3]}"><div class="project-image"><img loading="lazy" width="1200" height="750" src="${screenshot(p)}" alt="${pick(p,3)} — ${mediaLabel(p)}"><span>${mediaLabel(p)}</span></div><div class="project-meta">${p[1]}<span>${p[2]}</span></div><h3>${pick(p,3)} <span aria-hidden="true">↗</span></h3><p>${pick(p,5)}</p></a>`).join('');
 }
 document.querySelector('#project-filters').addEventListener('click',e=>{ const b=e.target.closest('button'); if(b){category=b.dataset.category;renderProjects();} });
 function openProject() {
   const p=cases.find(p=>location.hash===`#project/${p[0]}`);
   if(!p){if(modal.open)modal.close();return;}
   const labels=ru()?['Задача','Моя работа','Зачем это нужно','Технологии']:['The challenge','My contribution','Why it matters','Tools & technologies'];
-  document.querySelector('#project-detail').innerHTML=`<div class="detail-intro"><p class="section-kicker">${p[1]} / ${p[2]}</p><h2 id="project-name">${pick(p,3)}</h2><p class="detail-lead">${pick(p,5)}</p></div><img class="detail-image" width="1200" height="750" src="${screenshot(p)}" alt="${pick(p,3)}"><p class="image-note">${ru()?'Иллюстративная реконструкция интерфейса. Данные демонстрационные; это не скриншот рабочей системы.':'Illustrative interface reconstruction with demo data. Not a production screenshot.'}</p><div class="detail-story">${[7,9,11].map((n,i)=>`<section><h3>${labels[i]}</h3><p>${pick(p,n)}</p></section>`).join('')}<section><h3>${labels[3]}</h3><div class="tech-list">${p[13].map(t=>`<span>${t}</span>`).join('')}</div></section></div>`;
+  document.querySelector('#project-detail').innerHTML=`<div class="detail-intro"><p class="section-kicker">${p[1]} / ${p[2]}</p><h2 id="project-name">${pick(p,3)}</h2><p class="detail-lead">${pick(p,5)}</p></div>${projectGallery(p)}<div class="detail-story">${[7,9,11].map((n,i)=>`<section><h3>${labels[i]}</h3><p>${pick(p,n)}</p></section>`).join('')}<section><h3>${labels[3]}</h3><div class="tech-list">${p[13].map(t=>`<span>${t}</span>`).join('')}</div></section></div>`;
   if(!modal.open)modal.showModal();
   modal.scrollTop=0;
 }
